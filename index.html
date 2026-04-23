@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emmett Arthur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ─── Tokens ─────────────────────────────────────────────── */
+
+    :root {
+      --color-bg:               #f5f4f0;
+      --color-surface:          #eceae4;
+      --color-text-primary:     #1a1a18;
+      --color-text-secondary:   #6b6b65;
+      --color-text-tertiary:    #a0a099;
+      --color-border:           rgba(26, 26, 24, 0.12);
+      --color-border-mid:       rgba(26, 26, 24, 0.22);
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #141412;
+      --color-surface:          #1e1e1b;
+      --color-text-primary:     #e8e6df;
+      --color-text-secondary:   #8a8a82;
+      --color-text-tertiary:    #57574f;
+      --color-border:           rgba(232, 230, 223, 0.10);
+      --color-border-mid:       rgba(232, 230, 223, 0.18);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { background: var(--color-bg); transition: background 0.2s; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Layout ─────────────────────────────────────────────── */
+
+    .site-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ─── Top bar ────────────────────────────────────────────── */
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem 0 2.75rem;
+      border-bottom: 0.5px solid var(--color-border);
+      margin-bottom: 3.5rem;
+    }
+
+    .site-name {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .top-nav a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      transition: color 0.15s;
+    }
+
+    .top-nav a:hover { color: var(--color-text-primary); }
+
+    .toggle {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border: 0.5px solid var(--color-border-mid);
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: none;
+      font-family: 'Space Mono', monospace;
+      line-height: 1.4;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .toggle:hover { color: var(--color-text-primary); }
+
+    /* ─── Hero ───────────────────────────────────────────────── */
+
+    .hero { margin-bottom: 4rem; }
+
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+      max-width: 460px;
+    }
+
+    /* ─── Sections ───────────────────────────────────────────── */
+
+    .section { margin-bottom: 3.5rem; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    /* ─── Project list ───────────────────────────────────────── */
+
+    .project-list { list-style: none; }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 1.25rem;
+      padding: 0.9rem 0;
+      border-bottom: 0.5px solid var(--color-border);
+    }
+
+    .project-item:first-child { border-top: 0.5px solid var(--color-border); }
+
+    .project-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    .project-link {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      transition: color 0.15s;
+    }
+
+    .project-link:hover { color: var(--color-text-primary); }
+
+    .project-link.sunset {
+      text-decoration: line-through;
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .project-link.soon {
+      text-decoration: line-through;
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ─── Now block ──────────────────────────────────────────── */
+
+    .now-block {
+      background: var(--color-surface);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 3.5rem;
+      transition: background 0.2s;
+    }
+
+    .now-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .now-block p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+
+    .footer {
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--color-border);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--color-text-primary); }
+
+  </style>
+</head>
+<body>
+
+  <div class="site-wrap">
+
+    <!-- Top bar -->
+    <header class="top-bar">
+      <span class="site-name">Emmett Arthur</span>
+      <ul class="top-nav">
+        <li><a href="#projects">projects ↓</a></li>
+        <li><button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀</button></li>
+      </ul>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Product & AI.</h1>
+      <p>Learning, building and simplifying agentic systems and tools. Based in the Dolomites.</p>
+    </div>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <span class="section-label">Projects</span>
+      <ul class="project-list">
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">Inside the Black Box</div>
+            <div class="project-desc">A 6-week self-study curriculum for LLM and transformer architecture — retold in short essays, plain(ish) English, analogies, and diagrams.</div>
+          </div>
+          <a class="project-link" href="https://emmett-arthur.github.io/inside-the-black-box/index.html" target="_blank" rel="noopener">live ↗</a>
+        </li>
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">Career Graph</div>
+            <div class="project-desc">Adapting Karpathy's LLM wiki to build a career knowledge graph using Obsidian and Claude Code.</div>
+          </div>
+          <a class="project-link" href="https://github.com/emmett-arthur/career-graph" target="_blank" rel="noopener">github ↗</a>
+        </li>
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">Storia</div>
+            <div class="project-desc">Language learning through short stories and exercise drills. If I spent as much time studying as building I'd be halfway to fluent. Still more useful than Duolingo.</div>
+          </div>
+          <a class="project-link" href="https://www.trystoria.com/" target="_blank" rel="noopener">live ↗</a>
+        </li>
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">Soundboard</div>
+            <div class="project-desc">A narrow AI tool for tightening spoken delivery. Mostly an excuse to play with ElevenLabs and endlessly tinker with prompts and evals.</div>
+          </div>
+          <a class="project-link" href="https://trysoundboard.io/" target="_blank" rel="noopener">live ↗</a>
+        </li>
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">BarkFriends</div>
+            <div class="project-desc">A marketplace experiment connecting buyers and breeders across Europe. Interesting — but definitely a distribution problem, not a tech problem.</div>
+          </div>
+          <span class="project-link sunset">sunset</span>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- Now -->
+    <div class="now-block">
+      <span class="now-label">Now</span>
+      <p>On gardening leave after an acquisition. Wrapping up a redpoint campaign on a 7c+ in Val Rienza, building, learning, and burning through tokens whilst the subsidies last. Interested in small AI companies.</p>
+    </div>
+
+    <!-- Writing -->
+    <section class="section">
+      <span class="section-label">Writing</span>
+      <ul class="project-list">
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">Product Beyond Features</div>
+            <div class="project-desc">Why product is an operating model, not a roadmap. On structure, delegation, and the decisions that compound.</div>
+          </div>
+          <a class="project-link" href="PLACEHOLDER" target="_blank" rel="noopener">read ↗</a>
+        </li>
+
+        <li class="project-item">
+          <div>
+            <div class="project-name">TBC — Mech interp / world models</div>
+            <div class="project-desc">Something branching off Inside the Black Box. Still figuring out the angle.</div>
+          </div>
+          <span class="project-link soon">soon</span>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer class="footer" id="contact">
+      <ul class="footer-links">
+        <li><a href="mailto:e.welsharthur@gmail.com">e.welsharthur@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/emmettarthur/" target="_blank" rel="noopener">linkedin</a></li>
+        <li><a href="https://github.com/emmett-arthur" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Respect system preference on first load
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.setAttribute('data-theme', 'dark');
+      toggle.textContent = '☾';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggle.textContent = isDark ? '☀' : '☾';
+    });
+  </script>
+
+</body>
+</html>
