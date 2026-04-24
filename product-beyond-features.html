@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Beyond Features — Emmett Arthur</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-400-Regular');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-400-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-700-Regular');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-700-Italic');
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    /* ─── Tokens ─────────────────────────────────────────────── */
+
+    :root {
+      --color-bg:               #f5f4f0;
+      --color-surface:          #eceae4;
+      --color-text-primary:     #1a1a18;
+      --color-text-secondary:   #6b6b65;
+      --color-text-tertiary:    #a0a099;
+      --color-border:           rgba(26, 26, 24, 0.12);
+      --color-border-mid:       rgba(26, 26, 24, 0.22);
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #141412;
+      --color-surface:          #1e1e1b;
+      --color-text-primary:     #e8e6df;
+      --color-text-secondary:   #8a8a82;
+      --color-text-tertiary:    #57574f;
+      --color-border:           rgba(232, 230, 223, 0.10);
+      --color-border-mid:       rgba(232, 230, 223, 0.18);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--color-bg); transition: background 0.2s; }
+
+    body {
+      font-family: 'Lora', serif;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Outer shell ────────────────────────────────────────── */
+
+    .outer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+
+    /* ─── TOC sidebar ────────────────────────────────────────── */
+
+    .toc {
+      display: none;
+      position: fixed;
+      top: 6rem;
+      left: max(2rem, calc(50% - 540px));
+      width: 160px;
+    }
+
+    .toc-label {
+      font-family: 'Commit Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.85rem;
+      display: block;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .toc-list a {
+      font-family: 'Commit Mono', monospace;
+      font-size: 10px;
+      line-height: 1.5;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+      display: block;
+    }
+
+    .toc-list a:hover  { color: var(--color-text-secondary); }
+    .toc-list a.active { color: var(--color-text-primary); }
+
+    @media (min-width: 1000px) {
+      .toc.toc--ready { display: block; }
+    }
+
+    /* ─── Article column ─────────────────────────────────────── */
+
+    .page {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 0 6rem;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────── */
+
+    .back-nav {
+      padding: 1.75rem 0 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-family: 'Commit Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: var(--color-text-primary); }
+
+    .toggle {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border: 0.5px solid var(--color-border-mid);
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: none;
+      font-family: 'Commit Mono', monospace;
+      line-height: 1.4;
+      transition: color 0.15s;
+    }
+
+    /* ─── Article header ─────────────────────────────────────── */
+
+    .article-header {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--color-border);
+    }
+
+    .article-meta {
+      font-family: 'Commit Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .article-title {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--color-text-primary);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .article-lede {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ─── Article body ───────────────────────────────────────── */
+
+    .article-body {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--color-text-primary);
+    }
+
+    .article-body p { margin-bottom: 1.65rem; }
+    .article-body p:last-child { margin-bottom: 0; }
+
+    .article-body h2 {
+      font-family: 'Commit Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      font-weight: 400;
+      margin: 3.5rem 0 1.5rem;
+      scroll-margin-top: 5rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--color-border-mid);
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ─── Article footer ─────────────────────────────────────── */
+
+    .article-footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link-footer {
+      font-family: 'Commit Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .back-link-footer:hover { color: var(--color-text-primary); }
+
+    .next-piece {
+      font-family: 'Commit Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .next-piece:hover { color: var(--color-text-primary); }
+
+  </style>
+</head>
+<body>
+
+  <div class="outer">
+
+    <!-- TOC: built + shown by JS only when 3+ h2s exist -->
+    <nav class="toc" id="toc" aria-label="Table of contents">
+      <span class="toc-label">Contents</span>
+      <ul class="toc-list" id="toc-list"></ul>
+    </nav>
+
+    <div class="page">
+
+      <nav class="back-nav">
+        <a class="back-link" href="index.html">← emmettarthur.com</a>
+        <button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀</button>
+      </nav>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <span>Essay</span>
+          <span>April 2026</span>
+          <span>6 min read</span>
+        </div>
+        <h1 class="article-title">Product Beyond Features</h1>
+        <p class="article-lede">Why product is an operating model, not a roadmap. On structure, delegation, and the decisions that compound.</p>
+      </header>
+
+      <div class="article-body" id="article-body">
+
+        <p>Most product discussions revolve around features. What ships next, what moves metrics, what users ask for. It's a reasonable frame — features are visible, debatable, and easy to track on a roadmap.</p>
+
+        <p>But in every company I've worked in, the real leverage hasn't been at the feature level. It's been structural. The bottlenecks that actually slow teams down are rarely about what to build. They're about how decisions get made, how ownership is distributed, and how trade-offs get resolved when engineering, design, and commercial teams want different things.</p>
+
+        <h2 id="section-operating-model">Product as operating model</h2>
+
+        <p>At Omnipresent, hypergrowth exposed this clearly. We went from 50 to 500 people in under two years, and the friction that accumulated wasn't primarily a UI problem. It was a configuration problem. What was configurable by business teams? What required an engineer? What could be delegated to a customer, and what had to live inside the system?</p>
+
+        <p>Those decisions compound. A feature can be rewritten in a sprint. A structural decision embeds itself into how an organisation thinks, hires, and scales. The schema-driven form engine we built wasn't valuable because it was technically elegant — it was valuable because it moved a class of decisions out of the engineering queue entirely, and let regional teams own their own workflows.</p>
+
+        <blockquote>The shape of the system matters more than the surface.</blockquote>
+
+        <h2 id="section-practice">What this means in practice</h2>
+
+        <p>Product, understood this way, is less about backlog management and more about systems design operating across org structure, incentives, and information flow. It asks different questions: not just what should we build, but what should the system make easy, what should it make hard, and who should be able to change it without asking permission.</p>
+
+        <p>This is the part that gets harder to see as teams grow. In a five-person company, the product IS the operating model — everyone feels the shape of every decision. At 200 people, the model has calcified into process, and the product has become a symptom of how the org is structured rather than a deliberate design.</p>
+
+        <p>The job of product, then, is to keep the system legible. To make the structural decisions visible before they harden, and to build the kind of configurability that lets the organisation change faster than its own tooling.</p>
+
+        <h2 id="section-ai">What AI changes</h2>
+
+        <p>The same logic applies — and accelerates — when the execution layer is agentic. When Claude Code or Cowork can implement a workflow in hours rather than a sprint, the constraint shifts further upstream. The question is no longer just what to build, but what the system should be allowed to decide on its own, what it should surface for human judgement, and how you design the handoff between the two.</p>
+
+        <p>That's a product problem. It always was. AI just makes the structural decisions arrive faster, and the cost of getting them wrong harder to unwind.</p>
+
+      </div>
+
+      <footer class="article-footer">
+        <a class="back-link-footer" href="index.html">← emmettarthur.com</a>
+        <a class="next-piece" href="#">Mech interp / world models →</a>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    /* ── Light/dark toggle ── */
+    const toggle = document.getElementById('theme-toggle');
+    const html   = document.documentElement;
+
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.setAttribute('data-theme', 'dark');
+      toggle.textContent = '☾';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggle.textContent = isDark ? '☀' : '☾';
+    });
+
+    /* ── TOC: build from h2s, only show if 3+ ── */
+    const headings = document.querySelectorAll('#article-body h2');
+    const tocList  = document.getElementById('toc-list');
+    const toc      = document.getElementById('toc');
+
+    if (headings.length >= 3) {
+      headings.forEach(h => {
+        const li = document.createElement('li');
+        const a  = document.createElement('a');
+        a.href        = '#' + h.id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+      toc.classList.add('toc--ready');
+    }
+
+    /* ── TOC: highlight active section on scroll ── */
+    const tocLinks = tocList.querySelectorAll('a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = tocList.querySelector(`a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+
+    headings.forEach(h => observer.observe(h));
+  </script>
+
+</body>
+</html>
