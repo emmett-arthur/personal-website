@@ -101,14 +101,7 @@
       color: var(--color-text-primary);
     }
 
-    .top-nav {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .top-nav a {
+    .top-nav-link {
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -116,7 +109,7 @@
       transition: color 0.15s;
     }
 
-    .top-nav a:hover { color: var(--color-text-primary); }
+    .top-nav-link:hover { color: var(--color-text-primary); }
 
     .toggle {
       font-size: 13px;
@@ -280,10 +273,8 @@
     <!-- Top bar -->
     <header class="top-bar">
       <span class="site-name">Emmett Arthur</span>
-      <ul class="top-nav">
-        <li><a href="about/">about</a></li>
-        <li><button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☾</button></li>
-      </ul>
+      <a class="top-nav-link" href="about/">about</a>
+      <button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☾</button>
     </header>
 
     <!-- Hero -->
