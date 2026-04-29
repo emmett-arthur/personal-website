@@ -33,8 +33,6 @@
       font-weight: 700;
       font-style: italic;
     }
-  </style>
-  <style>
 
     /* ─── Tokens ─────────────────────────────────────────────── */
 
@@ -135,7 +133,7 @@
 
     /* ─── Hero ───────────────────────────────────────────────── */
 
-    .hero { margin-bottom: 4rem; }
+    .hero { margin-bottom: 3.5rem; }
 
     .hero h1 {
       font-family: 'Lora', serif;
@@ -196,7 +194,7 @@
       font-style: italic;
       font-size: 14px;
       color: var(--color-text-secondary);
-      line-height: 1.55;
+      line-height: 1.7;
     }
 
     .project-link {
@@ -271,6 +269,25 @@
 
     .footer-links a:hover { color: var(--color-text-primary); }
 
+    /* ─── Focus states ───────────────────────────────────────── */
+
+    :focus-visible {
+      outline: 2px solid var(--color-text-primary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ─── Mobile ─────────────────────────────────────────────── */
+
+    @media (max-width: 500px) {
+      .project-link {
+        padding: 0.6rem 0;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -294,7 +311,7 @@
 
     <!-- Projects -->
     <section class="section" id="projects">
-      <span class="section-label">Projects</span>
+      <span class="section-label" role="heading" aria-level="2">Projects</span>
       <ul class="project-list">
 
         <li class="project-item">
@@ -342,13 +359,13 @@
 
     <!-- Now -->
     <div class="now-block">
-      <span class="now-label">Now</span>
+      <span class="now-label" role="heading" aria-level="2">Now</span>
       <p>On gardening leave after an acquisition. Wrapping up a climbing project in Val Rienza. Building, learning, and burning through tokens whilst the subsidies last. Interested in small AI companies.</p>
     </div>
 
     <!-- Writing -->
     <section class="section">
-      <span class="section-label">Writing</span>
+      <span class="section-label" role="heading" aria-level="2">Writing</span>
       <ul class="project-list">
 
         <li class="project-item">
