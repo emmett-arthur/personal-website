@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Emmett Arthur</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-400-Regular');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-400-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-700-Regular');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Commit Mono';
+      src: local('CommitMono-700-Italic');
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    /* ─── Tokens ─────────────────────────────────────────────── */
+
+    :root {
+      --color-bg:               #f5f4f0;
+      --color-surface:          #eceae4;
+      --color-text-primary:     #1a1a18;
+      --color-text-secondary:   #6b6b65;
+      --color-text-tertiary:    #a0a099;
+      --color-border:           rgba(26, 26, 24, 0.12);
+      --color-border-mid:       rgba(26, 26, 24, 0.22);
+    }
+
+    [data-theme="dark"] {
+      --color-bg:               #141412;
+      --color-surface:          #1e1e1b;
+      --color-text-primary:     #e8e6df;
+      --color-text-secondary:   #8a8a82;
+      --color-text-tertiary:    #57574f;
+      --color-border:           rgba(232, 230, 223, 0.10);
+      --color-border-mid:       rgba(232, 230, 223, 0.18);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--color-bg); transition: background 0.2s; }
+
+    body {
+      font-family: 'Lora', serif;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Layout ─────────────────────────────────────────────── */
+
+    .page {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────── */
+
+    .back-nav {
+      padding: 1.75rem 0 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-family: 'Commit Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: var(--color-text-primary); }
+
+    .toggle {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border: 0.5px solid var(--color-border-mid);
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: none;
+      font-family: 'Commit Mono', monospace;
+      line-height: 1.4;
+      transition: color 0.15s;
+    }
+
+    /* ─── Photo ──────────────────────────────────────────────── */
+
+    .photo-wrap {
+      margin-bottom: 3rem;
+    }
+
+    .photo-wrap img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
+
+    /* ─── About body ─────────────────────────────────────────── */
+
+    .about-body {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--color-text-primary);
+    }
+
+    .about-body p { margin-bottom: 1.65rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+
+    .footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--color-border);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'Commit Mono', monospace;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--color-text-primary); }
+
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <nav class="back-nav">
+      <a class="back-link" href="../index.html">← emmettarthur.com</a>
+      <button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☾</button>
+    </nav>
+
+    <div class="photo-wrap">
+      <img src="../images/emmett.jpg" alt="Emmett Arthur">
+    </div>
+
+    <div class="about-body">
+
+      <p>I grew up on the East Coast studying Economics with the vague sense that incentives explained more than people admitted.</p>
+
+      <p>My first job wasn't in product. It was running film between studios and editors in Manhattan: tight deadlines, constant coordination, a lot of moving parts. In hindsight, a good dress rehearsal.</p>
+
+      <p>A year at LSE pulled me into finance, and American Express was my first exposure to infrastructure at real scale. I moved into product during London's first wave of challenger banks and Open Banking. An unusually exciting moment: established brands being questioned, infrastructure being rebuilt from scratch.</p>
+
+      <p>Around the same time I started climbing seriously. What began as a hobby became something more central, a counterbalance to screens and city pace.</p>
+
+      <p>A one-year move to the Dolomites in 2020 became permanent. COVID had other plans.</p>
+
+      <p>I joined a small startup building software for the climbing market, then Omnipresent at Series A as its first PM. I stayed through hypergrowth to acquisition by Deel and experienced the full arc: scrappy zero-to-one, scaling chaos, and the structural decisions that compound over time.</p>
+
+      <p>Now I'm on the other side of that. Spending time in the mountains and trying to keep pace with AI developments, which in 2026 is its own sport. Just published a 6-part LLM architecture essay series. Working across several early-stage projects and looking for the right next thing.</p>
+
+    </div>
+
+    <footer class="footer">
+      <ul class="footer-links">
+        <li><a href="mailto:e.welsharthur@gmail.com">e.welsharthur@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/emmettarthur/" target="_blank" rel="noopener">linkedin</a></li>
+        <li><a href="https://github.com/emmett-arthur" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html   = document.documentElement;
+
+    // Default is dark; switch to light if system prefers light
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      html.setAttribute('data-theme', 'light');
+      toggle.textContent = '☀';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggle.textContent = isDark ? '☀' : '☾';
+    });
+  </script>
+
+</body>
+</html>
