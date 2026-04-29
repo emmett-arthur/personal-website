@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,7 +149,7 @@
     .hero p {
       font-family: 'Lora', serif;
       font-style: italic;
-      font-size: 15px;
+      font-size: 16px;
       color: var(--color-text-secondary);
       line-height: 1.75;
       max-width: 460px;
@@ -184,7 +184,7 @@
     .project-item:first-child { border-top: 0.5px solid var(--color-border); }
 
     .project-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.02em;
       color: var(--color-text-primary);
@@ -194,7 +194,7 @@
     .project-desc {
       font-family: 'Lora', serif;
       font-style: italic;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--color-text-secondary);
       line-height: 1.55;
     }
@@ -245,7 +245,7 @@
     .now-block p {
       font-family: 'Lora', serif;
       font-style: italic;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--color-text-secondary);
       line-height: 1.8;
     }
@@ -264,7 +264,7 @@
     }
 
     .footer-links a {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--color-text-secondary);
       transition: color 0.15s;
     }
@@ -281,7 +281,7 @@
     <header class="top-bar">
       <span class="site-name">Emmett Arthur</span>
       <ul class="top-nav">
-<li><button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀</button></li>
+<li><button class="toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☾</button></li>
       </ul>
     </header>
 
@@ -384,10 +384,10 @@
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
 
-    // Respect system preference on first load
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      html.setAttribute('data-theme', 'dark');
-      toggle.textContent = '☾';
+    // Default is dark; switch to light if system prefers light
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      html.setAttribute('data-theme', 'light');
+      toggle.textContent = '☀';
     }
 
     toggle.addEventListener('click', () => {
